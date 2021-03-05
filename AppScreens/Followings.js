@@ -3,12 +3,14 @@ import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Image, Touch
 import axios from 'axios'
 import { ListItem } from "react-native-elements"
 function GetFollowings({ route, navigation }) {
-  const [data, setData] = React.useState([]);
+  
   const { loginUser } = route.params;
   let url = loginUser.following_url.replace("{/other_user}", "");
 
+  const [data, setData] = React.useState([]);
 
-  const axiosApiCall = (navigate) => {
+
+  const axiosApiCall = async => {
     axios({
       "method": "GET",
       "url": url
@@ -24,7 +26,7 @@ function GetFollowings({ route, navigation }) {
   }
 
   React.useEffect(() => {
-    axiosApiCall();
+     axiosApiCall();
   }, []);
 
   const onPressItem = (item) => {

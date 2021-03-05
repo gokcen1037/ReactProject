@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableHighlight, TextInput, TouchableOpacity, Button, Image, SafeAreaView, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight, TextInput, TouchableOpacity, Button, Image, SafeAreaView, FlatList,ActivityIndicator } from 'react-native';
 import { useNavigation, NavigationContainer } from '@react-navigation/native';
+import { useIsFocused } from '@react-navigation/native'
 import axios from 'axios'
 // function GoToButton({ screenName, buttonText }) {
 //   const navigation = useNavigation();
@@ -13,36 +14,39 @@ import axios from 'axios'
 //   );
 // }
 
-function DetailsScreen({ route, navigation }) {
+function MyReposScreen({ route, navigation }) {
+  const [isLoading, setLoading] = React.useState(true);
   const { loginUser } = route.params;
 
   const [data, setData] = React.useState([]);
   let url = loginUser.repos_url;
-
-  const axiosApiCall = (navigate) => {
+  
+  const axiosApiCall = async  => {
     axios({
       "method": "GET",
       "url": url
     })
       .then((response) => {
         //alert(response.data.name);
+          //setData(response.data);
           setData(response.data);
       })
       .catch((error) => {
         alert(error);
         console.log(error);
-      });
+      })
+      .finally(() => setLoading(false));
   }
 
   React.useEffect(() => {
-    axiosApiCall();
-  }, []);
+     axiosApiCall();
+  }, [loginUser.repos_url]);
 
   const Item = ({ item }) => (
-    <View style={styles.item}>
-        <Text style={styles.title}>{item.name}</Text>
-        <Text style={styles.text}>{item.description}</Text>
-      </View>
+    <TouchableOpacity style={styles.item}>
+    <Text style={styles.title}>{item.name}</Text>
+            <Text style={styles.text}>{item.description}</Text>
+    </TouchableOpacity>
   );
   
   const renderItem = ({ item }) => (
@@ -51,28 +55,32 @@ function DetailsScreen({ route, navigation }) {
 
   return (
     <SafeAreaView style={styles.container} >
-      <View style={styles.containerImage}>
-        <Image
+       {/* <View style={styles.containerImage}> 
+         <Image
           style={styles.circle}
           source={{
             uri: loginUser.avatar_url,
           }}
         />
-        <Text style={styles.logo}>{loginUser.name}</Text>
+        <Text style={styles.logo}>{loginUser.name}</Text> 
         <Button title="Open drawer" onPress={() => navigation.openDrawer()} />
-      </View>
-      <View style={styles.containerList}>
+       </View>  */}
+       {/* <View style={styles.containerList}>  */}
+       <Button title="Open drawer" onPress={() => navigation.openDrawer()} />
+      {isLoading ? <ActivityIndicator/> : (
         <FlatList
-          data={data}
-          renderItem={renderItem}
-          keyExtractor={item => item.id.toString()}
-        />
-      </View>
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={item => item.id.toString()}
+      />
+      )}
+        
+     {/* </View>  */}
     </SafeAreaView>
 
   );
 }
-export default DetailsScreen
+export default MyReposScreen
 
 const styles = StyleSheet.create({
   container: {

@@ -8,9 +8,9 @@ import axios from 'axios'
 function LoginScreen({ navigation }) {
   let [quote, setQuote] = React.useState('')
   let [userName, setUserName] = React.useState('')
-  const [data, setData] = React.useState({});
+  
+  let [data, setData] = React.useState({});
   let url = "https://api.github.com/users/";
-  const nn = useNavigation();
   const axiosApiCall = (navigate) => {
     axios({
       "method": "GET",
@@ -18,11 +18,12 @@ function LoginScreen({ navigation }) {
     })
       .then((response) => {
         
-        setData(response.data);
+        setData(response.data); 
         //alert(data.name);
-        nn.navigate('Home', {
-          loginUser: response.data
-        });
+        navigation.push('Home',{
+             loginUser: response.data
+           });
+        
       })
       .catch((error) => {
         alert(error);

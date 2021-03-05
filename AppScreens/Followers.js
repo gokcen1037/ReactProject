@@ -1,15 +1,16 @@
-import React from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Image, TouchableOpacity,Button } from 'react-native';
+import React, {Component} from 'react';
+import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Image, TouchableOpacity,Button,ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios'
 import { ListItem } from "react-native-elements"
 
 function GetFollowers({ route, navigation }) {
+  const [isLoading, setLoading] = React.useState(true);
   const [data, setData] = React.useState([]);
   const { loginUser } = route.params;
   let url = loginUser.followers_url;
   const nn = useNavigation();
-  const axiosApiCall = (navigate) => {
+  const axiosApiCall = async (navigate) => {
     axios({
       "method": "GET",
       "url": url
@@ -21,9 +22,9 @@ function GetFollowers({ route, navigation }) {
       .catch((error) => {
         alert(error);
         console.log(error);
-      });
+      })
+      .finally(() => setLoading(false));
   }
-
   React.useEffect(() => {
     axiosApiCall();
   }, []);
@@ -48,13 +49,14 @@ function GetFollowers({ route, navigation }) {
   );
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
+      {isLoading ? <ActivityIndicator/> : (
+        <FlatList
         data={data}
         renderItem={renderItem}
         keyExtractor={item => item.login.toString()}
       />
+      )}
     </SafeAreaView>
-
   );
 }
 export default GetFollowers;

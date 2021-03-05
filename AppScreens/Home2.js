@@ -32,9 +32,9 @@ export default function Home2Screen({ route }) {
     //   <Tab.Screen name={"Followings (" + loginUser.following + ")"} component={GetFollowings} initialParams={{ loginUser: loginUser }} />
     // </Tab.Navigator>
     <Drawer.Navigator initialRouteName="Profile">
-       <Drawer.Screen name="Profile" component={ProfileScreen}  initialParams={{ loginUser: loginUser }}/>
-       <Drawer.Screen name="Home" component={HomeScreen}  initialParams={{ loginUser: loginUser }}/>
-       <Drawer.Screen name="Log Out" component={LoginScreen} options={{ headerShown: false }} initialParams={{ loginUser: loginUser }}/>
+       <Drawer.Screen name="Profile" component={ProfileScreen} options={{ headerShown: true }}  initialParams={{ loginUser: loginUser }}/>
+       <Drawer.Screen name="Home" component={HomeScreen} options={{ headerShown: true, drawerLabel: 'My Lists' }} initialParams={{ loginUser: loginUser }}/>
+       <Drawer.Screen name="Login" component={LoginScreen} options={{ headerShown: false , drawerLabel: 'Log Out' }} initialParams={{ loginUser: loginUser }}/>
      </Drawer.Navigator>
   );
 

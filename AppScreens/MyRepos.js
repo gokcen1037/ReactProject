@@ -66,7 +66,7 @@ function MyReposScreen({ route, navigation }) {
         <Button title="Open drawer" onPress={() => navigation.openDrawer()} />
        </View>  */}
        {/* <View style={styles.containerList}>  */}
-       <Button title="Open drawer" onPress={() => navigation.openDrawer()} />
+       {/* <Button title="Open drawer" onPress={() => navigation.openDrawer()} /> */}
       {isLoading ? <ActivityIndicator/> : (
         <FlatList
         data={data}

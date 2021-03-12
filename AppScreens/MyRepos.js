@@ -42,8 +42,14 @@ function MyReposScreen({ route, navigation }) {
      axiosApiCall();
   }, [loginUser.repos_url]);
 
+  const onPressItem = (item) => {
+    //alert(item.url);
+    navigation.push('Github Profile',{
+      html_url: item.html_url
+    });
+  }
   const Item = ({ item }) => (
-    <TouchableOpacity style={styles.item}>
+    <TouchableOpacity style={styles.item} onPress={() => onPressItem(item)}>
     <Text style={styles.title}>{item.name}</Text>
             <Text style={styles.text}>{item.description}</Text>
     </TouchableOpacity>

@@ -7,6 +7,7 @@ import HomeScreen from './AppScreens/Home'
 import Home2Screen from './AppScreens/Home2'
 import LoginScreen from './AppScreens/Login'
 import ProfileScreen from './AppScreens/Profile'
+import GithubProfileScreen from './AppScreens/Githubprofile'
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -17,6 +18,7 @@ function App() {
      <Stack.Navigator initialRouteName="Login">
        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
        <Stack.Screen name="Home" component={Home2Screen} options={{ headerShown: false }} />
+       <Stack.Screen name="Github Profile" component={GithubProfileScreen} options={{ headerShown: true }} />
      </Stack.Navigator>
      {/* <Drawer.Navigator initialRouteName="Login">
        <Drawer.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}/>

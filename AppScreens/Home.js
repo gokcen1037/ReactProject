@@ -14,7 +14,7 @@ export default function HomeScreen({ route, navigation }) {
   return (
     <Tab.Navigator tabBarPosition="bottom" initialRouteName="Profil">
       {/* <Tab.Screen name={"Profil("+ loginUser.login + ")"}component={ProfileScreen} initialParams={{ loginUser: loginUser }} />  */}
-      <Tab.Screen name={"My Repos(" + loginUser.login + ")"} component={MyReposScreen} initialParams={{ loginUser: loginUser }} /> 
+      <Tab.Screen name={"My Repos(" + loginUser.public_repos + ")"} component={MyReposScreen} initialParams={{ loginUser: loginUser }} /> 
       <Tab.Screen name={"Followers (" + loginUser.followers + ")"} component={GetFollowers} initialParams={{ loginUser: loginUser }} />
       <Tab.Screen name={"Followings (" + loginUser.following + ")"} component={GetFollowings} initialParams={{ loginUser: loginUser }} />
     </Tab.Navigator>

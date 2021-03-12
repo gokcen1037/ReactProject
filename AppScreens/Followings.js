@@ -30,7 +30,10 @@ function GetFollowings({ route, navigation }) {
   }, []);
 
   const onPressItem = (item) => {
-    alert(item.url);
+    //alert(item.url);
+    navigation.push('Github Profile',{
+      html_url: item.html_url
+    });
   }
   const Item = ({ item }) => (
     <TouchableOpacity style={styles.item} onPress={() => onPressItem(item)}>

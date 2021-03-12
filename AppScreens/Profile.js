@@ -13,6 +13,8 @@ function ProfileScreen({ route, navigation }) {
           }}
         />
         <Text style={styles.logo}>{loginUser.name}</Text> 
+        <Text style={styles.text}>{loginUser.location}</Text> 
+        <Text style={styles.text}>{"since : " + loginUser.created_at}</Text> 
         <Button title="Open drawer" onPress={() => navigation.openDrawer()} />
        </View> 
     </SafeAreaView>
@@ -57,6 +59,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
   },
   text: {
+    color: "#fb5b5a",
     fontSize: 15,
   },
 });

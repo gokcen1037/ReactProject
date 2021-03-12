@@ -14,7 +14,7 @@ function ProfileScreen({ route, navigation }) {
         />
         <Text style={styles.logo}>{loginUser.name}</Text> 
         <Text style={styles.text}>{loginUser.location}</Text> 
-        <Text style={styles.text}>{"since : " + loginUser.created_at}</Text> 
+        <Text style={styles.text}>{"Since : " + loginUser.created_at}</Text> 
         <Button title="Open drawer" onPress={() => navigation.openDrawer()} />
        </View> 
     </SafeAreaView>
